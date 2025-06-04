@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="description"
+      content="AgroAI helps detect plant diseases using AI by analyzing leaf images." />
+    <meta
+      name="keywords"
+      content="Plant Disease Detection, AI, Agriculture, Leaf Analysis, AgroAI" />
+    <meta name="author" content="Rishov Chakraborty" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AgroAI - Plant Disease Detection</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <link
+      rel="icon"
+      href="https://png.pngtree.com/png-vector/20211208/ourmid/pngtree-agricultural-logo-design-png-image_4051578.png" />
+
+    <style src="style.css"></style>
+  </head>
+
+  <body class="gradient-bg font-raleway min-h-screen flex flex-col">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg fixed top-0 w-full z-50">
+      <div
+        class="container mx-auto px-4 py-3 flex justify-between items-center">
+        <div class="flex items-center space-x-3">
+          <img
+            src="https://png.pngtree.com/png-vector/20211208/ourmid/pngtree-agricultural-logo-design-png-image_4051578.png"
+            class="h-8 w-8"
+            alt="AgroAI Logo" />
+          <span class="text-xl font-bold text-gray-800">AgroAI</span>
+        </div>
+        <div class="hidden md:flex space-x-6">
+          <a
+            href="index.html"
+            class="text-agro-green font-semibold border-b-2 border-agro-green pb-1"
+            >Home</a
+          >
+          <a href="links.html" class="hover:text-agro-green text-gray-600"
+            >Resources</a
+          >
+          <a
+            href="https://www.kaggle.com/datasets/vipoooool/new-plant-diseases-dataset/data"
+            target="_blank"
+            class="hover:text-agro-green text-gray-600"
+            >Dataset</a
+          >
+          <a
+            href="https://en.wikipedia.org/wiki/Machine_learning"
+            target="_blank"
+            class="hover:text-agro-green text-gray-600"
+            >About AI</a
+          >
+        </div>
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="flex-grow container mx-auto px-4 py-24">
+      <!-- Prediction Card -->
+      <div
+        class="max-w-4xl mx-auto bg-white rounded-xl shadow-lg overflow-hidden card">
+        <div class="md:flex">
+          <!-- Upload Section -->
+          <div
+            class="w-full md:w-1/2 p-8 flex flex-col items-center justify-center">
+            <div class="text-center mb-6">
+              <div class="inline-block bg-agro-light p-3 rounded-full mb-4">
+                <i class="fas fa-leaf text-agro-green text-3xl"></i>
+              </div>
+              <h2 class="text-2xl font-bold text-gray-800">
+                Plant Health Analysis
+              </h2>
+              <p class="text-gray-600 mt-2">
+                Upload or capture an image of plant leaves
+              </p>
+            </div>
+
+            <div id="uploadSection" class="w-full">
+              <div
+                id="uploadArea"
+                class="upload-area rounded-lg p-8 text-center cursor-pointer mb-4">
+                <i
+                  class="fas fa-cloud-upload-alt text-agro-green text-4xl mb-3"></i>
+                <p class="font-medium text-gray-700">
+                  Click to upload or drag & drop
+                </p>
+                <p class="text-sm text-gray-500 mt-1">JPG, PNG up to 5MB</p>
+                <input
+                  type="file"
+                  id="imageUpload"
+                  accept="image/*"
+                  class="hidden" />
+              </div>
+            </div>
+
+            <div id="imagePreviewContainer" class="mt-6 hidden w-full">
+              <div class="relative">
+                <img
+                  id="imagePreview"
+                  class="rounded-lg shadow-md w-full h-64 object-cover hover-scale"
+                  style="max-width: 100%" />
+                <button
+                  id="clearImageBtn"
+                  class="absolute top-2 right-2 bg-white rounded-full p-2 shadow-md text-red-500 hover:bg-red-50">
+                  <i class="fas fa-times"></i>
+                </button>
+              </div>
+              <button
+                id="predictBtn"
+                class="w-full mt-4 bg-blue-500 hover:bg-blue-600 text-white font-semibold py-3 px-6 rounded-lg shadow-md transition duration-300 fade-in hidden">
+                <i class="fas fa-search mr-2"></i> Analyze Image
+              </button>
+            </div>
+          </div>
+
+          <!-- Results Section -->
+          <div class="w-full md:w-1/2 bg-agro-light p-8 flex flex-col">
+            <div class="text-center mb-6">
+              <div class="inline-block bg-white p-3 rounded-full mb-4 shadow">
+                <i class="fas fa-chart-line text-agro-green text-3xl"></i>
+              </div>
+              <h2 class="text-2xl font-bold text-gray-800">Analysis Results</h2>
+              <p class="text-gray-600 mt-2">
+                Detailed diagnosis will appear here
+              </p>
+            </div>
+
+            <div
+              id="loading"
+              class="hidden flex-col items-center justify-center py-8">
+              <div
+                class="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-agro-green mb-4"></div>
+              <p class="text-agro-green font-semibold">
+                Analyzing your plant image...
+              </p>
+              <p class="text-sm text-gray-500 mt-2">
+                This may take a few moments
+              </p>
+            </div>
+
+            <div id="result" class="flex-grow flex flex-col justify-center">
+              <div class="text-center text-gray-400">
+                <i class="fas fa-seedling text-4xl mb-3"></i>
+                <p>No analysis performed yet</p>
+                <p class="text-sm mt-2">
+                  Upload an image and click "Analyze" to get started
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8">
+      <div class="container mx-auto px-4">
+        <div class="flex flex-col md:flex-row justify-between items-center">
+          <div class="mb-4 md:mb-0">
+            <div class="flex items-center space-x-2">
+              <img
+                src="https://png.pngtree.com/png-vector/20211208/ourmid/pngtree-agricultural-logo-design-png-image_4051578.png"
+                class="h-8 w-8"
+                alt="AgroAI Logo" />
+              <span class="text-xl font-bold">AgroAI</span>
+            </div>
+            <p class="text-gray-400 mt-2">
+              Empowering farmers with AI technology
+            </p>
+          </div>
+          <div class="flex space-x-6">
+            <a
+              href="https://www.facebook.com/rishov.chakraborty.3"
+              class="hover:text-agro-green transition-colors"
+              target="_blank">
+              <i class="fab fa-facebook text-xl"></i>
+            </a>
+            <a
+              href="https://www.linkedin.com/in/rishov-chakraborty-77ab46236"
+              class="hover:text-agro-green transition-colors"
+              target="_blank">
+              <i class="fab fa-linkedin text-xl"></i>
+            </a>
+            <a
+              href="https://github.com/iRishov"
+              class="hover:text-agro-green transition-colors"
+              target="_blank">
+              <i class="fab fa-github text-xl"></i>
+            </a>
+          </div>
+        </div>
+        <div
+          class="border-t border-gray-700 mt-6 pt-6 text-center text-gray-400 text-sm">
+          <p>
+            &copy; 2025 AgroAI - Plant Disease Classification. All rights
+            reserved.
+          </p>
+          <p class="mt-1">For research and educational purposes only.</p>
+        </div>
+      </div>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>

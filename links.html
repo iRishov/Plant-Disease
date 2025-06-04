@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="description"
+      content="AgroAI helps detect plant diseases using AI by analyzing leaf images." />
+    <meta
+      name="keywords"
+      content="Plant Disease Detection, AI, Agriculture, Leaf Analysis, AgroAI" />
+    <meta name="author" content="Rishov Chakraborty" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AgroAI - Plant Disease Detection</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <link
+      rel="icon"
+      href="https://png.pngtree.com/png-vector/20211208/ourmid/pngtree-agricultural-logo-design-png-image_4051578.png" />
+
+    <style src="style.css"></style>
+  </head>
+
+  <body class="gradient-bg font-raleway min-h-screen flex flex-col">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg fixed top-0 w-full z-50">
+      <div
+        class="container mx-auto px-4 py-3 flex justify-between items-center">
+        <div class="flex items-center space-x-3">
+          <img
+            src="https://png.pngtree.com/png-vector/20211208/ourmid/pngtree-agricultural-logo-design-png-image_4051578.png"
+            class="h-8 w-8"
+            alt="AgroAI Logo" />
+          <span class="text-xl font-bold text-gray-800">AgroAI</span>
+        </div>
+        <div class="hidden md:flex space-x-6">
+          <a href="index.html" class="hover:text-agro-green text-gray-600"
+            >Home</a
+          >
+          <a
+            href="links.html"
+            class="text-agro-green font-semibold border-b-2 border-agro-green pb-1"
+            >Resources</a
+          >
+          <a
+            href="https://www.kaggle.com/datasets/vipoooool/new-plant-diseases-dataset/data"
+            target="_blank"
+            class="hover:text-agro-green text-gray-600"
+            >Dataset</a
+          >
+          <a
+            href="https://en.wikipedia.org/wiki/Machine_learning"
+            target="_blank"
+            class="hover:text-agro-green text-gray-600"
+            >About AI</a
+          >
+        </div>
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="flex-grow container mx-auto px-4 py-24">
+      <!-- Resources Card -->
+      <div
+        class="max-w-6xl mx-auto bg-white/80 backdrop-blur-lg rounded-2xl shadow-lg p-10 space-y-8">
+        <h2 class="text-3xl font-bold text-center text-agro-green mb-8">
+          🚀 Resources Powering AgroAI
+        </h2>
+
+        <div class="grid md:grid-cols-2 gap-8">
+          <!-- TensorFlow -->
+          <div>
+            <h3
+              class="text-xl font-semibold text-agro-green flex items-center gap-2">
+              <i class="fas fa-brain"></i> TensorFlow
+            </h3>
+            <p class="text-gray-700">
+              <a
+                href="https://www.tensorflow.org/"
+                class="underline text-agro-green font-medium"
+                >TensorFlow</a
+              >
+              is an open-source framework by Google for building and deploying
+              ML models at scale, supporting deep learning and neural networks.
+            </p>
+          </div>
+
+          <!-- TensorFlow Lite -->
+          <div>
+            <h3
+              class="text-xl font-semibold text-agro-green flex items-center gap-2">
+              <i class="fas fa-mobile-alt"></i> TensorFlow Lite
+            </h3>
+            <p class="text-gray-700">
+              <a
+                href="https://www.tensorflow.org/lite"
+                class="underline text-agro-green font-medium"
+                >TensorFlow Lite</a
+              >
+              enables model deployment on mobile and edge devices with optimized
+              performance and low memory footprint.
+            </p>
+          </div>
+
+          <!-- FastAPI -->
+          <div>
+            <h3
+              class="text-xl font-semibold text-agro-green flex items-center gap-2">
+              <i class="fas fa-rocket"></i> FastAPI
+            </h3>
+            <p class="text-gray-700">
+              <a
+                href="https://fastapi.tiangolo.com/"
+                class="underline text-agro-green font-medium"
+                >FastAPI</a
+              >
+              is a modern, high-performance Python web framework for building
+              APIs with automatic OpenAPI and JSON schema generation.
+            </p>
+          </div>
+
+          <!-- Plant Disease Dataset -->
+          <div>
+            <h3
+              class="text-xl font-semibold text-agro-green flex items-center gap-2">
+              <i class="fas fa-seedling"></i> Plant Disease Dataset
+            </h3>
+            <p class="text-gray-700">
+              <a
+                href="https://www.kaggle.com/datasets/vipoooool/new-plant-diseases-dataset/data"
+                class="underline text-agro-green font-medium"
+                >Plant Disease Dataset</a
+              >
+              provides labeled images of plant leaves to train ML models in
+              detecting diseases.
+            </p>
+          </div>
+
+          <!-- EfficientNetV2S -->
+          <div>
+            <h3
+              class="text-xl font-semibold text-agro-green flex items-center gap-2">
+              <i class="fas fa-network-wired"></i> EfficientNetV2S
+            </h3>
+            <p class="text-gray-700">
+              <a
+                href="https://arxiv.org/abs/2104.00298"
+                class="underline text-agro-green font-medium"
+                >EfficientNetV2S</a
+              >
+              is a fast and accurate convolutional neural network optimized for
+              both training and inference speed.
+            </p>
+          </div>
+
+          <!-- ResNet50V2 -->
+          <div>
+            <h3
+              class="text-xl font-semibold text-agro-green flex items-center gap-2">
+              <i class="fas fa-layer-group"></i> ResNet50V2
+            </h3>
+            <p class="text-gray-700">
+              <a
+                href="https://keras.io/api/applications/resnet/#resnet50v2-function"
+                class="underline text-agro-green font-medium"
+                >ResNet50V2</a
+              >
+              introduces improved residual connections to increase model
+              accuracy in image classification tasks.
+            </p>
+          </div>
+
+          <!-- CNN -->
+          <div>
+            <h3
+              class="text-xl font-semibold text-agro-green flex items-center gap-2">
+              <i class="fas fa-project-diagram"></i> Convolutional Neural
+              Networks (CNN)
+            </h3>
+            <p class="text-gray-700">
+              CNNs are the backbone of image-based machine learning tasks. They
+              are especially effective in pattern recognition and visual data
+              classification.
+            </p>
+          </div>
+
+          <!-- Machine Learning -->
+          <div>
+            <h3
+              class="text-xl font-semibold text-agro-green flex items-center gap-2">
+              <i class="fas fa-cogs"></i> Machine Learning
+            </h3>
+            <p class="text-gray-700">
+              Machine learning enables AgroAI to learn from plant data, identify
+              disease symptoms, and make accurate predictions using model
+              inference.
+            </p>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8">
+      <div class="container mx-auto px-4">
+        <div class="flex flex-col md:flex-row justify-between items-center">
+          <div class="mb-4 md:mb-0">
+            <div class="flex items-center space-x-2">
+              <img
+                src="https://png.pngtree.com/png-vector/20211208/ourmid/pngtree-agricultural-logo-design-png-image_4051578.png"
+                class="h-8 w-8"
+                alt="AgroAI Logo" />
+              <span class="text-xl font-bold">AgroAI</span>
+            </div>
+            <p class="text-gray-400 mt-2">
+              Empowering farmers with AI technology
+            </p>
+          </div>
+          <div class="flex space-x-6">
+            <a
+              href="https://www.facebook.com/rishov.chakraborty.3"
+              class="hover:text-agro-green transition-colors"
+              target="_blank">
+              <i class="fab fa-facebook text-xl"></i>
+            </a>
+            <a
+              href="https://www.linkedin.com/in/rishov-chakraborty-77ab46236"
+              class="hover:text-agro-green transition-colors"
+              target="_blank">
+              <i class="fab fa-linkedin text-xl"></i>
+            </a>
+            <a
+              href="https://github.com/iRishov"
+              class="hover:text-agro-green transition-colors"
+              target="_blank">
+              <i class="fab fa-github text-xl"></i>
+            </a>
+          </div>
+        </div>
+        <div
+          class="border-t border-gray-700 mt-6 pt-6 text-center text-gray-400 text-sm">
+          <p>
+            &copy; 2025 AgroAI - Plant Disease Classification. All rights
+            reserved.
+          </p>
+          <p class="mt-1">For research and educational purposes only.</p>
+        </div>
+      </div>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>

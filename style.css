@@ -1,0 +1,95 @@
+.gradient-bg {
+    background: linear-gradient(135deg, #f5f7fa 0%, #e8f5e9 100%);
+}
+
+.hover-scale {
+    transition: transform 0.3s ease;
+}
+
+.hover-scale:hover {
+    transform: scale(1.02);
+}
+
+.card {
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.upload-area {
+    border: 2px dashed #c8e6c9;
+    transition: all 0.3s;
+}
+
+.upload-area:hover {
+    border-color: #81c784;
+    background-color: #f1f8e9;
+}
+
+.upload-area.dragover {
+    border-color: #2e7d32;
+    background-color: #e8f5e9;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.animate-spin {
+    animation: spin 1s linear infinite;
+}
+
+.fade-in {
+    animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@media (max-width: 768px) {
+    .card {
+        margin: 10px;
+        padding: 15px;
+    }
+
+    .upload-area {
+        padding: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .gradient-bg {
+        background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+    }
+
+    .hover-scale {
+        transition: transform 0.2s ease;
+    }
+
+    .upload-area {
+        padding: 15px;
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+    .gradient-bg {
+        background: linear-gradient(135deg, #263238 0%, #37474f 100%);
+    }
+
+    .upload-area {
+        border-color: #90a4ae;
+        background-color: #455a64;
+    }
+
+    .upload-area.dragover {
+        border-color: #b0bec5;
+        background-color: #546e7a;
+    }
+}

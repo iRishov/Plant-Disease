@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI in Agriculture</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;700&display=swap"
+      rel="stylesheet" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <link
+      rel="icon"
+      href="https://png.pngtree.com/png-vector/20211208/ourmid/pngtree-agricultural-logo-design-png-image_4051578.png" />
+    <style>
+      /* Custom animations */
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .fade-in {
+        animation: fadeIn 0.8s ease-out;
+      }
+
+      .blur-bg {
+        backdrop-filter: blur(10px);
+        background-color: rgba(255, 255, 255, 0.7);
+      }
+
+      .hover-scale {
+        transition: transform 0.3s ease;
+      }
+
+      .hover-scale:hover {
+        transform: scale(1.05);
+      }
+    </style>
+  </head>
+
+  <body class="bg-gray-100 font-raleway">
+    <!-- Navbar -->
+    <nav class="bg-black bg-opacity-50 fixed top-0 w-full z-10">
+      <div
+        class="container mx-auto px-4 py-2 flex justify-between items-center">
+        <a
+          class="text-white text-xl font-bold hover:text-green-500 transition-colors"
+          href="#">
+          🌱 Plant Disease Classification
+        </a>
+        <button class="text-white text-xl md:hidden" id="navbar-toggle">
+          <i class="fas fa-bars"></i>
+        </button>
+        <div class="hidden md:flex space-x-4" id="navbar-menu">
+          <a
+            class="text-white hover:text-green-500 transition-colors"
+            href="index.html"
+            >Home</a
+          >
+          <a
+            class="text-white hover:text-green-500 transition-colors"
+            href="links.html"
+            >Links</a
+          >
+          <a
+            class="text-white hover:text-green-500 transition-colors"
+            href="https://www.kaggle.com/datasets/vipoooool/new-plant-diseases-dataset/data"
+            target="_blank"
+            >Dataset</a
+          >
+          <a
+            class="text-white hover:text-green-500 transition-colors"
+            href="https://en.wikipedia.org/wiki/Machine_learning"
+            target="_blank"
+            >About</a
+          >
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section
+      class="relative h-screen flex items-center justify-center bg-cover bg-center"
+      style="
+        background-image: url('https://storage.googleapis.com/a1aa/image/Z-MOeB5YdyBLKERBiVzMQ_Zp2f9LihmSe6xsVpRBNEk.jpg');
+      ">
+      <div
+        class="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-center items-start p-8">
+        <h1 class="text-white text-4xl md:text-6xl font-bold fade-in">AI IN</h1>
+        <h1 class="text-green-500 text-4xl md:text-6xl font-bold fade-in">
+          AGRICULTURE
+        </h1>
+        <div class="border-t-4 border-green-500 w-1/2 my-4 fade-in"></div>
+        <h2 class="text-white text-xl md:text-2xl fade-in">
+          THE FUTURE OF FARMING
+        </h2>
+      </div>
+    </section>
+
+    <!-- About AI Section -->
+    <section class="py-12 bg-white">
+      <div class="container mx-auto px-4">
+        <h2 class="text-center text-3xl font-bold mb-8 fade-in">
+          The Role of AI in Modern Agriculture
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div class="bg-gray-100 p-6 rounded-lg shadow-lg hover-scale fade-in">
+            <h3 class="text-xl font-bold mb-4">Precision Farming</h3>
+            <p>
+              AI enables precision farming by analyzing data from sensors and
+              drones to optimize crop yields.
+            </p>
+          </div>
+          <div class="bg-gray-100 p-6 rounded-lg shadow-lg hover-scale fade-in">
+            <h3 class="text-xl font-bold mb-4">Disease Detection</h3>
+            <p>
+              Machine learning models can detect plant diseases early, reducing
+              crop loss and improving food security.
+            </p>
+          </div>
+          <div class="bg-gray-100 p-6 rounded-lg shadow-lg hover-scale fade-in">
+            <h3 class="text-xl font-bold mb-4">Automation</h3>
+            <p>
+              AI-powered robots and drones automate tasks like planting,
+              watering, and harvesting.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Necessity of Early Stage Crop Disease Detection Section -->
+    <section class="py-12 bg-gray-100">
+      <div class="container mx-auto px-4">
+        <h2 class="text-center text-3xl font-bold mb-8 fade-in">
+          Necessity of Early Stage Crop Disease Detection
+        </h2>
+        <p class="text-center mb-8 fade-in">
+          Early detection of crop diseases is crucial to prevent significant
+          losses in the global market. Recent studies have shown that crop
+          diseases can lead to billions of dollars in losses annually. By
+          leveraging AI, we can detect diseases at an early stage, ensuring
+          better crop management and food security.
+        </p>
+        <p class="text-center mb-8 fade-in">
+          The involvement of AI in agriculture is becoming increasingly
+          important. AI technologies can analyze vast amounts of data, provide
+          accurate predictions, and automate various tasks, making farming more
+          efficient and sustainable.
+        </p>
+      </div>
+    </section>
+
+    <!-- Prediction Section -->
+    <section
+      id="predict"
+      class="bg-gray-100 min-screen flex items-center justify-center">
+      <div
+        class="container mx-auto px-4 text-center flex flex-col items-center justify-center">
+        <h1 class="text-4xl font-bold text-green-600 mb-6 fade-in">
+          🌱 Plant Disease Prediction 🌿
+        </h1>
+
+        <button
+          id="getStartedBtn"
+          class="bg-green-500 hover:bg-green-600 text-white font-semibold py-3 px-6 rounded-lg shadow-md transition duration-300 fade-in"
+          onclick="showUploadSection()">
+          🚀 Get Started
+        </button>
+
+        <div
+          id="uploadSection"
+          class="mt-6 hidden p-6 bg-white rounded-lg shadow-lg flex flex-col items-center justify-center w-full max-w-md fade-in">
+          <input
+            type="file"
+            id="imageUpload"
+            accept="image/*"
+            class="block w-full text-gray-700 border border-gray-300 rounded-lg p-2 mb-4"
+            onchange="uploadImage()" />
+          <img
+            id="imagePreview"
+            class="rounded-lg shadow-md hidden mt-4 hover-scale"
+            style="max-width: 100%" />
+          <button
+            id="predictBtn"
+            class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-3 px-6 rounded-lg shadow-md mt-4 hidden transition duration-300 fade-in"
+            onclick="predictImage()">
+            🔍 Predict
+          </button>
+        </div>
+
+        <div
+          id="loading"
+          class="hidden mt-4 text-blue-600 font-semibold fade-in">
+          ⏳ Processing... Please wait
+        </div>
+        <div id="result" class="mt-6 text-lg font-semibold fade-in"></div>
+      </div>
+    </section>
+
+    <br /><br />
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white text-center py-4">
+      <div class="container mx-auto px-4">
+        <p>&copy; 2025 Plant Disease Classification. All rights reserved.</p>
+        <p>
+          For research purposes only.
+          <a
+            href="https://www.linkedin.com/in/rishov-chakraborty-77ab46236"
+            class="text-white hover:text-green-500 transition-colors"
+            >LinkedIn</a
+          >
+        </p>
+      </div>
+    </footer>
+
+    <script>
+      // Image Upload and Prediction Logic
+      function showUploadSection() {
+        document.getElementById("uploadSection").classList.remove("hidden");
+        document.getElementById("getStartedBtn").classList.add("hidden");
+      }
+
+      function uploadImage() {
+        const fileInput = document.getElementById("imageUpload");
+        const imagePreview = document.getElementById("imagePreview");
+        const predictBtn = document.getElementById("predictBtn");
+        const file = fileInput.files[0];
+
+        if (!file) {
+          alert("⚠️ Please select an image.");
+          return;
+        }
+
+        const reader = new FileReader();
+        reader.onload = function (e) {
+          imagePreview.src = e.target.result;
+          imagePreview.classList.remove("hidden");
+          predictBtn.classList.remove("hidden");
+        };
+        reader.readAsDataURL(file);
+      }
+
+      async function predictImage() {
+        const fileInput = document.getElementById("imageUpload");
+        const resultDiv = document.getElementById("result");
+        const loadingDiv = document.getElementById("loading");
+        const file = fileInput.files[0];
+
+        if (!file) {
+          alert("⚠️ Please select an image first.");
+          return;
+        }
+
+        const formData = new FormData();
+        formData.append("file", file);
+        resultDiv.innerHTML = "";
+        loadingDiv.classList.remove("hidden");
+
+        try {
+          const response = await fetch("http://127.0.0.1:8000/predict", {
+            method: "POST",
+            body: formData,
+          });
+          const data = await response.json();
+          loadingDiv.classList.add("hidden");
+
+          if (data.error) {
+            resultDiv.innerHTML = `<div class='text-red-500 font-bold p-4 bg-red-100 rounded-lg'>❌ ${data.error}</div>`;
+          } else {
+            resultDiv.innerHTML = `
+                        <div class='text-green-600 font-bold p-4 bg-green-100 rounded-lg'>✅ Prediction: <span class='text-black'>${
+                          data.class
+                        }</span><br>
+                        📊 Confidence: <span class='text-black'>${(
+                          data.confidence * 100
+                        ).toFixed(2)}%</span></div>
+                        <div class='mt-4 p-4 bg-white rounded-lg shadow-lg text-left'>
+                            <h2 class='text-xl font-bold text-green-700'>📝 Disease Details</h2>
+                            <p><strong>Symptoms:</strong> ${
+                              data.details.symptoms
+                            }</p>
+                            <p><strong>Disease Cycle:</strong> ${
+                              data.details.disease_cycle || "Not available"
+                            }</p>
+                            <p><strong>Pesticide Usage:</strong> ${
+                              data.details.pesticide_usage || "Not available"
+                            }</p>
+                        </div>
+                    `;
+          }
+        } catch (error) {
+          loadingDiv.classList.add("hidden");
+          resultDiv.innerHTML = `<div class='text-red-500 font-bold p-4 bg-red-100 rounded-lg'>❌ Error: ${error.message}</div>`;
+        }
+      }
+    </script>
+  </body>
+</html>

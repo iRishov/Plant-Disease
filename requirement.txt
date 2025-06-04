@@ -1,0 +1,16 @@
+docx
+fastapi
+uvicorn
+tensorflow
+numpy
+Pillow
+opencv-python
+pathlib
+matplotlib
+seaborn
+scikit-learn
+pandas
+flask
+reportlab
+jupyter
+python-multipart
