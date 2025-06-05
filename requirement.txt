@@ -1,8 +1,6 @@
 docx
 fastapi
 uvicorn
-tensorflow
-numpy
 Pillow
 opencv-python
 pathlib
@@ -14,3 +12,5 @@ flask
 reportlab
 jupyter
 python-multipart
+numpy
+tensorflow

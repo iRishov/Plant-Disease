@@ -84,6 +84,20 @@
             </div>
 
             <div id="uploadSection" class="w-full">
+              <div class="mb-4">
+                <label
+                  for="modelSelect"
+                  class="block text-gray-700 font-medium mb-2"
+                  >Select Model:</label
+                >
+                <select
+                  id="modelSelect"
+                  class="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                  <option value="efficientnetv2s">EfficientNetV2S</option>
+                  <option value="cnn">CNN</option>
+                  <option value="inceptionresnetv2">InceptionResNetV2</option>
+                </select>
+              </div>
               <div
                 id="uploadArea"
                 class="upload-area rounded-lg p-8 text-center cursor-pointer mb-4">

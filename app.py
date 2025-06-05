@@ -1,4 +1,4 @@
-from fastapi import FastAPI, File, UploadFile
+from fastapi import FastAPI, File, UploadFile, Query
 from fastapi.middleware.cors import CORSMiddleware
 import tensorflow as tf
 import numpy as np
@@ -7,6 +7,7 @@ from PIL import Image
 import uvicorn
 import os
 from keras.utils import load_img, img_to_array # type: ignore
+from disease_data import LABELS, DISEASE_DETAILS # Import labels and details
 
 
 app = FastAPI()
@@ -20,251 +21,52 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Load the model from the .keras file
+# Define model paths
+MODEL_PATHS = {
+    "cnn": r"G:\Trained Models\cnn.keras",
+    "efficientnetv2s": r"G:\Trained Models\EfficientNetV2S_model.keras",
+    "inceptionresnetv2": r"G:\Trained Models\InceptionResNetV2_model.keras",
+}
 
-
-MODEL_PATH = r"G:\Trained Models\InceptionResNetV2_model.keras"
-if os.path.exists(MODEL_PATH):
-    MODEL = tf.keras.models.load_model(MODEL_PATH, compile=True) # type: ignore
-else:
-    MODEL = None
-    print(f"⚠ Warning: Model file {MODEL_PATH} not found!")
+# Cache for loaded models
+LOADED_MODELS = {}
 
 # Updated class labels for 38 classes (PlantVillage dataset)
-LABELS = {
-    0: "Apple___Apple_scab",
-    1: "Apple___Black_rot",
-    2: "Apple___Cedar_apple_rust",
-    3: "Apple___Healthy",
-    4: "Blueberry___Healthy",
-    5: "Cherry_(including_sour)___Powdery_mildew",
-    6: "Cherry_(including_sour)___Healthy",
-    7: "Corn_(maize)___Cercospora_leaf_spot",
-    8: "Corn_(maize)___Common_rust",
-    9: "Corn_(maize)___Northern_Leaf_Blight",
-    10: "Corn_(maize)___Healthy",
-    11: "Grape___Black_rot",
-    12: "Grape___Esca_(Black_Measles)",
-    13: "Grape___Leaf_blight_(Isariopsis_Leaf_Spot)",
-    14: "Grape___Healthy",
-    15: "Orange___Haunglongbing_(Citrus_greening)",
-    16: "Peach___Bacterial_spot",
-    17: "Peach___Healthy",
-    18: "Pepper__bell___Bacterial_spot",
-    19: "Pepper__bell___Healthy",
-    20: "Potato___Early_blight",
-    21: "Potato___Late_blight",
-    22: "Potato___Healthy",
-    23: "Raspberry___Healthy",
-    24: "Soybean___Healthy",
-    25: "Squash___Powdery_mildew",
-    26: "Strawberry___Leaf_scorch",
-    27: "Strawberry___Healthy",
-    28: "Tomato___Bacterial_spot",
-    29: "Tomato___Early_blight",
-    30: "Tomato___Late_blight",
-    31: "Tomato___Leaf_mold",
-    32: "Tomato___Septoria_leaf_spot",
-    33: "Tomato___Spider_mites_Two_spotted_spider_mite",
-    34: "Tomato___Target_Spot",
-    35: "Tomato___Yellow_Leaf__Curl_Virus",
-    36: "Tomato___Mosaic_virus",
-    37: "Tomato___Healthy"
-}
+# LABELS = { ... moved to disease_data.py }
 
 # Updated disease details for each class (placeholders—update with actual details)
-DISEASE_DETAILS = {
-    "Apple___Apple_scab": {
-        "symptoms": "Dark, scabby lesions on leaves and fruits.",
-        "disease_cycle": "Fungal spores overwinter in fallen leaves and debris.",
-        "pesticide_usage": "Fungicides may be required during wet weather."
-    },
-    "Apple___Black_rot": {
-        "symptoms": "Dark lesions on leaves, fruits, and twigs.",
-        "disease_cycle": "Fungus survives on infected plant debris.",
-        "pesticide_usage": "Copper-based sprays or specific fungicides."
-    },
-    "Apple___Cedar_apple_rust": {
-        "symptoms": "Orange pustules on leaves and fruit; leaf spots.",
-        "disease_cycle": "Requires both apple and juniper hosts to complete its cycle.",
-        "pesticide_usage": "Fungicide applications during early infection stages."
-    },
-    "Apple___Healthy": {
-        "symptoms": "No disease symptoms; normal appearance.",
-        "disease_cycle": "",
-        "pesticide_usage": ""
-    },
-    "Blueberry___Healthy": {
-        "symptoms": "No visible disease symptoms.",
-        "disease_cycle": "",
-        "pesticide_usage": ""
-    },
-    "Cherry_(including_sour)___Powdery_mildew": {
-        "symptoms": "White powdery growth on leaves and shoots.",
-        "disease_cycle": "Fungus overwinters on bud scales and twigs.",
-        "pesticide_usage": "Sulfur-based fungicides are commonly used."
-    },
-    "Cherry_(including_sour)___Healthy": {
-        "symptoms": "No visible disease symptoms.",
-        "disease_cycle": "",
-        "pesticide_usage": ""
-    },
-    "Corn_(maize)___Cercospora_leaf_spot": {
-        "symptoms": "Small, circular spots with gray centers on leaves.",
-        "disease_cycle": "Pathogen overwinters in crop residue.",
-        "pesticide_usage": "Fungicides and crop rotation are recommended."
-    },
-    "Corn_(maize)___Common_rust": {
-        "symptoms": "Rust-colored pustules on leaf surfaces.",
-        "disease_cycle": "Fungus overwinters in alternate hosts and crop residue.",
-        "pesticide_usage": "Timely fungicide application is essential."
-    },
-    "Corn_(maize)___Northern_Leaf_Blight": {
-        "symptoms": "Long, elliptical lesions with a tan center.",
-        "disease_cycle": "Pathogen overwinters in corn residue.",
-        "pesticide_usage": "Use of fungicides and resistant varieties."
-    },
-    "Corn_(maize)___Healthy": {
-        "symptoms": "No visible disease symptoms.",
-        "disease_cycle": "",
-        "pesticide_usage": ""
-    },
-    "Grape___Black_rot": {
-        "symptoms": "Small, brown spots that enlarge and become corky.",
-        "disease_cycle": "Fungus overwinters in mummified berries and twigs.",
-        "pesticide_usage": "Regular fungicide sprays are needed during wet periods."
-    },
-    "Grape___Esca_(Black_Measles)": {
-        "symptoms": "Brownish discoloration and necrotic spots on leaves.",
-        "disease_cycle": "Fungal pathogens colonize the vascular tissues.",
-        "pesticide_usage": "Management is difficult; cultural practices help."
-    },
-    "Grape___Leaf_blight_(Isariopsis_Leaf_Spot)": {
-        "symptoms": "Spotted leaves with yellow halos.",
-        "disease_cycle": "Fungus survives on fallen leaves.",
-        "pesticide_usage": "Fungicide applications are recommended."
-    },
-    "Grape___Healthy": {
-        "symptoms": "No visible disease symptoms.",
-        "disease_cycle": "",
-        "pesticide_usage": ""
-    },
-    "Orange___Haunglongbing_(Citrus_greening)": {
-        "symptoms": "Yellow shoots, blotchy mottling on leaves, and misshapen fruits.",
-        "disease_cycle": "Bacterial infection spread by the Asian citrus psyllid.",
-        "pesticide_usage": "Management includes vector control and removal of infected trees."
-    },
-    "Peach___Bacterial_spot": {
-        "symptoms": "Dark, water-soaked lesions on leaves and fruits.",
-        "disease_cycle": "Bacteria overwinter in twigs and buds.",
-        "pesticide_usage": "Copper sprays and proper sanitation are recommended."
-    },
-    "Peach___Healthy": {
-        "symptoms": "No visible disease symptoms.",
-        "disease_cycle": "",
-        "pesticide_usage": ""
-    },
-    "Pepper__bell___Bacterial_spot": {
-        "symptoms": "Small, water-soaked lesions that turn brown on leaves.",
-        "disease_cycle": "Bacteria spread through splashing water and contaminated seeds.",
-        "pesticide_usage": "Copper-based sprays are typically used."
-    },
-    "Pepper__bell___Healthy": {
-        "symptoms": "No visible disease symptoms.",
-        "disease_cycle": "",
-        "pesticide_usage": ""
-    },
-    "Potato___Early_blight": {
-        "symptoms": "Small, dark spots on older leaves with concentric rings.",
-        "disease_cycle": "Fungus survives on plant debris and in the soil.",
-        "pesticide_usage": "Fungicides and crop rotation are key management strategies."
-    },
-    "Potato___Late_blight": {
-        "symptoms": "Large, water-soaked lesions with white mold on the undersides of leaves.",
-        "disease_cycle": "Pathogen thrives in cool, wet conditions.",
-        "pesticide_usage": "Fungicides and field sanitation are critical."
-    },
-    "Potato___Healthy": {
-        "symptoms": "No visible disease symptoms.",
-        "disease_cycle": "",
-        "pesticide_usage": ""
-    },
-    "Raspberry___Healthy": {
-        "symptoms": "No visible disease symptoms.",
-        "disease_cycle": "",
-        "pesticide_usage": ""
-    },
-    "Soybean___Healthy": {
-        "symptoms": "No visible disease symptoms.",
-        "disease_cycle": "",
-        "pesticide_usage": ""
-    },
-    "Squash___Powdery_mildew": {
-        "symptoms": "White, powdery spots on leaves and stems.",
-        "disease_cycle": "Fungus overwinters in plant debris and spreads in dry conditions.",
-        "pesticide_usage": "Sulfur-based fungicides are often applied."
-    },
-    "Strawberry___Leaf_scorch": {
-        "symptoms": "Brownish lesions on leaves with scorched margins.",
-        "disease_cycle": "Disease often results from environmental stress combined with pathogen infection.",
-        "pesticide_usage": "Fungicide treatment may be required in severe cases."
-    },
-    "Strawberry___Healthy": {
-        "symptoms": "No visible disease symptoms.",
-        "disease_cycle": "",
-        "pesticide_usage": ""
-    },
-    "Tomato___Bacterial_spot": {
-        "symptoms": "Small, dark spots on leaves and fruits.",
-        "disease_cycle": "Bacteria spread by splashing water and contaminated seeds.",
-        "pesticide_usage": "Copper-based sprays and resistant varieties help manage the disease."
-    },
-    "Tomato___Early_blight": {
-        "symptoms": "Dark spots with concentric rings on lower leaves.",
-        "disease_cycle": "Fungal spores survive in plant debris and soil.",
-        "pesticide_usage": "Fungicides such as Chlorothalonil and Mancozeb are effective."
-    },
-    "Tomato___Late_blight": {
-        "symptoms": "Large, water-soaked lesions with white mold underneath.",
-        "disease_cycle": "Pathogen thrives in humid, cool conditions.",
-        "pesticide_usage": "Timely fungicide application is crucial."
-    },
-    "Tomato___Leaf_mold": {
-        "symptoms": "Yellow spots on upper leaf surfaces and mold on undersides.",
-        "disease_cycle": "Fungus develops in warm, humid conditions.",
-        "pesticide_usage": "Fungicides and proper ventilation can help manage the disease."
-    },
-    "Tomato___Septoria_leaf_spot": {
-        "symptoms": "Small, circular spots with gray centers on leaves.",
-        "disease_cycle": "Pathogen overwinters in infected plant debris.",
-        "pesticide_usage": "Regular fungicide sprays and removal of infected leaves are recommended."
-    },
-    "Tomato___Spider_mites_Two_spotted_spider_mite": {
-        "symptoms": "Fine webbing and stippling on leaves, leading to discoloration.",
-        "disease_cycle": "Mites multiply rapidly in hot, dry conditions.",
-        "pesticide_usage": "Miticides or natural remedies like neem oil are effective."
-    },
-    "Tomato___Target_Spot": {
-        "symptoms": "Dark, circular lesions with concentric rings on leaves.",
-        "disease_cycle": "Fungal spores are spread by wind and rain.",
-        "pesticide_usage": "Fungicides and removal of infected plant parts are advised."
-    },
-    "Tomato___Yellow_Leaf__Curl_Virus": {
-        "symptoms": "Yellowing and upward curling of leaves with stunted growth.",
-        "disease_cycle": "Virus is transmitted by whiteflies in warm climates.",
-        "pesticide_usage": "Vector control and resistant varieties are key."
-    },
-    "Tomato___Mosaic_virus": {
-        "symptoms": "Mottled appearance on leaves, stunted growth, and deformed fruits.",
-        "disease_cycle": "Virus is spread by contact and infected seeds.",
-        "pesticide_usage": "No chemical cure exists; removal of infected plants is essential."
-    },
-    "Tomato___Healthy": {
-        "symptoms": "No visible disease symptoms.",
-        "disease_cycle": "",
-        "pesticide_usage": ""
-    }
-}
+# DISEASE_DETAILS = { ... moved to disease_data.py }
+
+# Helper function to load model
+def load_model(model_name: str):
+    if model_name in LOADED_MODELS:
+        return LOADED_MODELS[model_name]
+
+    model_path = MODEL_PATHS.get(model_name)
+    if not model_path:
+        print(f"⚠ Warning: Model name {model_name} not found in MODEL_PATHS!")
+        return None
+
+    if not os.path.exists(model_path):
+        print(f"⚠ Warning: Model file {model_path} not found!")
+        return None
+
+    try:
+        model = tf.keras.models.load_model(model_path, compile=True) # type: ignore
+        LOADED_MODELS[model_name] = model # Cache the loaded model
+        print(f"✓ Successfully loaded model: {model_name}")
+        return model
+    except Exception as e:
+        print(f"❌ Error loading model {model_name} from {model_path}: {e}")
+        return None
+
+# Preload all models at startup
+@app.on_event("startup")
+async def startup_event():
+    print("Starting to preload all models...")
+    for model_name in MODEL_PATHS.keys():
+        load_model(model_name)
+    print("All models preloaded successfully!")
 
 def preprocess_image(file_bytes, target_size=(224, 224)):
       
@@ -275,14 +77,17 @@ def preprocess_image(file_bytes, target_size=(224, 224)):
 
 
 @app.post("/predict")
-async def predict(file: UploadFile = File(...)):
-    if MODEL is None:
-        return {"error": "Model is not available. Please check the model path."}
+async def predict(file: UploadFile = File(...), model_name: str = Query("efficientnetv2s")):
+    # Default to efficientnetv2s if no model_name is provided
+    model = load_model(model_name)
+
+    if model is None:
+        return {"error": f"Model '{model_name}' is not available or could not be loaded. Please check the model name and path."}
     
     try:
         file_bytes = await file.read()
         image_array = preprocess_image(file_bytes)
-        predictions = MODEL.predict(image_array)[0]
+        predictions = model.predict(image_array)[0]
         confidence = float(np.max(predictions))
         
         if confidence < 0.4:  # Adjust confidence threshold if needed

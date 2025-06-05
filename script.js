@@ -90,6 +90,10 @@ async function predictImage() {
     return;
   }
 
+  // Get selected model name
+  const modelSelect = document.getElementById("modelSelect");
+  const selectedModel = modelSelect.value;
+
   const formData = new FormData();
   formData.append("file", file);
 
@@ -98,10 +102,14 @@ async function predictImage() {
   loadingDiv.classList.remove("hidden");
 
   try {
-    const response = await fetch("http://127.0.0.1:8000/predict", {
-      method: "POST",
-      body: formData,
-    });
+    // Include model_name as a query parameter
+    const response = await fetch(
+      `http://127.0.0.1:8000/predict?model_name=${selectedModel}`,
+      {
+        method: "POST",
+        body: formData,
+      }
+    );
     const data = await response.json();
     displayResults(data);
   } catch (error) {
