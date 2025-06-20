@@ -23,6 +23,46 @@
       href="https://png.pngtree.com/png-vector/20211208/ourmid/pngtree-agricultural-logo-design-png-image_4051578.png" />
 
     <style src="style.css"></style>
+    <style>
+      /* Custom Animations */
+      @keyframes fadeInUp {
+        0% {
+          opacity: 0;
+          transform: translateY(40px);
+        }
+        100% {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      @keyframes floatBlob {
+        0%,
+        100% {
+          transform: translateY(0) scale(1);
+        }
+        50% {
+          transform: translateY(-20px) scale(1.05);
+        }
+      }
+      .animate-fadeInUp {
+        animation: fadeInUp 1s cubic-bezier(0.23, 1, 0.32, 1) both;
+      }
+      .animate-fadeInUp-delay-1 {
+        animation: fadeInUp 1s 0.2s cubic-bezier(0.23, 1, 0.32, 1) both;
+      }
+      .animate-fadeInUp-delay-2 {
+        animation: fadeInUp 1s 0.4s cubic-bezier(0.23, 1, 0.32, 1) both;
+      }
+      .animate-fadeInUp-delay-3 {
+        animation: fadeInUp 1s 0.6s cubic-bezier(0.23, 1, 0.32, 1) both;
+      }
+      .animate-floatBlob {
+        animation: floatBlob 6s ease-in-out infinite;
+      }
+      .animate-fadeInCard {
+        animation: fadeInUp 1.2s 0.5s cubic-bezier(0.23, 1, 0.32, 1) both;
+      }
+    </style>
   </head>
 
   <body class="gradient-bg font-raleway min-h-screen flex flex-col">
@@ -31,10 +71,7 @@
       <div
         class="container mx-auto px-4 py-3 flex justify-between items-center">
         <div class="flex items-center space-x-3">
-          <img
-            src="https://png.pngtree.com/png-vector/20211208/ourmid/pngtree-agricultural-logo-design-png-image_4051578.png"
-            class="h-8 w-8"
-            alt="AgroAI Logo" />
+          <img src="logo.jpg" class="h-8 w-8" alt="AgroAI Logo" />
           <span class="text-xl font-bold text-gray-800">AgroAI</span>
         </div>
         <div class="hidden md:flex space-x-6">
@@ -62,11 +99,76 @@
       </div>
     </nav>
 
-    <!-- Main Content -->
+    <!-- Hero Section -->
+    <section
+      class="relative bg-gradient-to-br from-green-100 via-white to-agro-light py-24 md:py-36 flex items-center justify-center overflow-hidden">
+      <!-- Decorative SVG Blobs -->
+      <svg
+        class="absolute top-0 left-0 w-64 h-64 opacity-20 -z-10 animate-floatBlob"
+        viewBox="0 0 200 200"
+        xmlns="http://www.w3.org/2000/svg">
+        <path
+          fill="#34d399"
+          d="M44.8,-67.2C56.7,-59.2,63.7,-44.2,68.2,-29.2C72.7,-14.2,74.7,0.8,70.2,14.7C65.7,28.6,54.7,41.4,41.2,50.7C27.7,60,11.8,65.8,-3.7,70.2C-19.2,74.6,-34.3,77.6,-46.7,70.2C-59.1,62.8,-68.8,45,-71.2,27.1C-73.6,9.2,-68.7,-8.8,-62.2,-25.7C-55.7,-42.6,-47.7,-58.4,-34.7,-66.7C-21.7,-75,-3.8,-75.8,12.7,-77.2C29.2,-78.6,58.3,-75.2,44.8,-67.2Z"
+          transform="translate(100 100)" />
+      </svg>
+      <svg
+        class="absolute bottom-0 right-0 w-80 h-80 opacity-10 -z-10 animate-floatBlob"
+        viewBox="0 0 200 200"
+        xmlns="http://www.w3.org/2000/svg">
+        <path
+          fill="#2563eb"
+          d="M38.2,-66.2C50.7,-59.7,62.2,-50.7,68.2,-39.1C74.2,-27.5,74.7,-13.2,74.2,1.2C73.7,15.7,72.2,31.3,63.7,41.7C55.2,52.2,39.7,57.5,25.2,62.2C10.7,66.8,-2.8,70.8,-17.2,69.2C-31.6,67.7,-46.9,60.6,-56.7,48.7C-66.5,36.8,-70.8,20.2,-70.2,4.2C-69.6,-11.8,-64.1,-27.2,-54.7,-37.7C-45.3,-48.2,-32,-53.8,-18.2,-59.7C-4.4,-65.6,9.8,-71.7,23.2,-72.2C36.6,-72.7,49.7,-67.2,38.2,-66.2Z"
+          transform="translate(100 100)" />
+      </svg>
+      <div
+        class="container mx-auto px-4 flex flex-col items-center text-center relative z-10">
+        <img
+          src="logo.jpg"
+          alt="AgroAI Logo"
+          class="h-20 w-20 mb-6 rounded-full border-4 border-agro-green shadow-xl bg-white animate-fadeInUp" />
+        <h1
+          class="text-5xl md:text-6xl font-extrabold text-gray-800 mb-4 drop-shadow-lg animate-fadeInUp-delay-1">
+          Welcome to <span class="text-agro-green">AgroAI</span>
+        </h1>
+        <p
+          class="text-xl md:text-2xl text-gray-700 mb-10 max-w-2xl font-medium animate-fadeInUp-delay-2">
+          Empowering <span class="text-agro-green font-bold">farmers</span> and
+          <span class="text-blue-600 font-bold">researchers</span> with
+          AI-driven plant disease detection. Upload a leaf image and let our
+          models help you diagnose plant health in seconds.
+        </p>
+        <a
+          href="#uploadSection"
+          class="inline-block bg-agro-green hover:bg-green-600 text-white font-bold py-4 px-10 rounded-xl shadow-lg transition duration-300 text-xl tracking-wide animate-fadeInUp-delay-3 transform hover:scale-105 focus:scale-105 active:scale-95">
+          Get Started</a
+        >
+        <!-- Animated Scroll Indicator -->
+        <div class="mt-12 flex flex-col items-center animate-fadeInUp-delay-3">
+          <span class="text-gray-400 text-lg mb-2">Scroll Down</span>
+          <span class="animate-bounce text-agro-green text-3xl"
+            ><i class="fas fa-chevron-down"></i
+          ></span>
+        </div>
+      </div>
+      <div class="absolute inset-0 pointer-events-none">
+        <svg
+          class="absolute bottom-0 left-0 w-full h-24 md:h-32"
+          viewBox="0 0 1440 320"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg">
+          <path
+            fill="#e6f4ea"
+            fill-opacity="1"
+            d="M0,224L48,197.3C96,171,192,117,288,117.3C384,117,480,171,576,197.3C672,224,768,224,864,197.3C960,171,1056,117,1152,101.3C1248,85,1344,107,1392,117.3L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
+        </svg>
+      </div>
+    </section>
+
     <main class="flex-grow container mx-auto px-4 py-24">
       <!-- Prediction Card -->
       <div
-        class="max-w-4xl mx-auto bg-white rounded-xl shadow-lg overflow-hidden card">
+        class="max-w-4xl mx-auto bg-white rounded-xl shadow-lg overflow-hidden card border-2 border-agro-green animate-fadeInCard">
         <div class="md:flex">
           <!-- Upload Section -->
           <div
@@ -75,10 +177,10 @@
               <div class="inline-block bg-agro-light p-3 rounded-full mb-4">
                 <i class="fas fa-leaf text-agro-green text-3xl"></i>
               </div>
-              <h2 class="text-2xl font-bold text-gray-800">
+              <h2 class="text-3xl font-extrabold text-gray-800 mb-2">
                 Plant Health Analysis
               </h2>
-              <p class="text-gray-600 mt-2">
+              <p class="text-gray-600 mt-2 font-extrabold text-lg">
                 Upload or capture an image of plant leaves
               </p>
             </div>
@@ -87,7 +189,7 @@
               <div class="mb-4">
                 <label
                   for="modelSelect"
-                  class="block text-gray-700 font-medium mb-2"
+                  class="block text-gray-700 font-extrabold mb-2 text-lg"
                   >Select Model:</label
                 >
                 <select
@@ -103,7 +205,7 @@
                 class="upload-area rounded-lg p-8 text-center cursor-pointer mb-4">
                 <i
                   class="fas fa-cloud-upload-alt text-agro-green text-4xl mb-3"></i>
-                <p class="font-medium text-gray-700">
+                <p class="font-extrabold text-gray-700 text-lg">
                   Click to upload or drag & drop
                 </p>
                 <p class="text-sm text-gray-500 mt-1">JPG, PNG up to 5MB</p>
@@ -129,7 +231,7 @@
               </div>
               <button
                 id="predictBtn"
-                class="w-full mt-4 bg-blue-500 hover:bg-blue-600 text-white font-semibold py-3 px-6 rounded-lg shadow-md transition duration-300 fade-in hidden">
+                class="w-full mt-4 bg-blue-500 hover:bg-blue-600 text-white font-extrabold py-3 px-6 rounded-lg shadow-md transition duration-300 fade-in hidden text-lg">
                 <i class="fas fa-search mr-2"></i> Analyze Image
               </button>
             </div>
@@ -141,8 +243,10 @@
               <div class="inline-block bg-white p-3 rounded-full mb-4 shadow">
                 <i class="fas fa-chart-line text-agro-green text-3xl"></i>
               </div>
-              <h2 class="text-2xl font-bold text-gray-800">Analysis Results</h2>
-              <p class="text-gray-600 mt-2">
+              <h2 class="text-3xl font-extrabold text-gray-800 mb-2">
+                Analysis Results
+              </h2>
+              <p class="text-gray-600 mt-2 font-extrabold text-lg">
                 Detailed diagnosis will appear here
               </p>
             </div>
@@ -152,10 +256,10 @@
               class="hidden flex-col items-center justify-center py-8">
               <div
                 class="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-agro-green mb-4"></div>
-              <p class="text-agro-green font-semibold">
+              <p class="text-agro-green font-extrabold text-lg">
                 Analyzing your plant image...
               </p>
-              <p class="text-sm text-gray-500 mt-2">
+              <p class="text-sm text-gray-500 mt-2 font-extrabold text-base">
                 This may take a few moments
               </p>
             </div>
@@ -164,7 +268,7 @@
               <div class="text-center text-gray-400">
                 <i class="fas fa-seedling text-4xl mb-3"></i>
                 <p>No analysis performed yet</p>
-                <p class="text-sm mt-2">
+                <p class="text-sm mt-2 font-extrabold text-base">
                   Upload an image and click "Analyze" to get started
                 </p>
               </div>
@@ -174,16 +278,58 @@
       </div>
     </main>
 
+    <!-- Model Recommendation Section -->
+    <section class="container mx-auto px-4 py-8">
+      <h2 class="text-2xl font-bold text-gray-800 text-center mb-6">
+        Which Model Should I Use?
+      </h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <!-- Custom CNN Recommendation -->
+        <div
+          class="bg-agro-light border-l-4 border-agro-green p-6 rounded-xl shadow flex flex-col items-start">
+          <h3 class="text-lg font-semibold text-agro-green mb-2">
+            Need Fast Results?
+          </h3>
+          <p class="text-gray-700">
+            Choose <span class="font-bold">Custom CNN</span> for the quickest
+            predictions. Ideal for real-time or resource-limited scenarios where
+            speed is most important.
+          </p>
+        </div>
+        <!-- EfficientNetV2-S Recommendation -->
+        <div
+          class="bg-blue-50 border-l-4 border-blue-500 p-6 rounded-xl shadow flex flex-col items-start">
+          <h3 class="text-lg font-semibold text-blue-600 mb-2">
+            Want a Balance?
+          </h3>
+          <p class="text-gray-700">
+            Select <span class="font-bold">EfficientNetV2-S</span> for a great
+            balance of accuracy and speed. Recommended for most users who want
+            reliable results without long wait times.
+          </p>
+        </div>
+        <!-- InceptionResNetV2 Recommendation -->
+        <div
+          class="bg-purple-50 border-l-4 border-purple-700 p-6 rounded-xl shadow flex flex-col items-start">
+          <h3 class="text-lg font-semibold text-purple-700 mb-2">
+            Maximum Accuracy Needed?
+          </h3>
+          <p class="text-gray-700">
+            Pick <span class="font-bold">InceptionResNetV2</span> if you need
+            the highest possible accuracy and can wait a bit longer for results.
+            Best for research or critical diagnoses.
+          </p>
+        </div>
+      </div>
+    </section>
+
     <!-- Footer -->
     <footer class="bg-gray-800 text-white py-8">
       <div class="container mx-auto px-4">
         <div class="flex flex-col md:flex-row justify-between items-center">
           <div class="mb-4 md:mb-0">
             <div class="flex items-center space-x-2">
-              <img
-                src="https://png.pngtree.com/png-vector/20211208/ourmid/pngtree-agricultural-logo-design-png-image_4051578.png"
-                class="h-8 w-8"
-                alt="AgroAI Logo" />
+              <img src="logo.jpg" class="h-8 w-8" alt="AgroAI Logo" />
               <span class="text-xl font-bold">AgroAI</span>
             </div>
             <p class="text-gray-400 mt-2">

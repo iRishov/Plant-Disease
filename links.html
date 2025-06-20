@@ -18,11 +18,41 @@
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
-    <link
-      rel="icon"
-      href="https://png.pngtree.com/png-vector/20211208/ourmid/pngtree-agricultural-logo-design-png-image_4051578.png" />
+    <link rel="icon" href="logo.jpg" />
 
     <style src="style.css"></style>
+    <style>
+      @keyframes fadeInUp {
+        0% {
+          opacity: 0;
+          transform: translateY(40px);
+        }
+        100% {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      .animate-fadeInUp {
+        animation: fadeInUp 1s cubic-bezier(0.23, 1, 0.32, 1) both;
+      }
+      .animate-fadeInUp-delay-1 {
+        animation: fadeInUp 1s 0.2s cubic-bezier(0.23, 1, 0.32, 1) both;
+      }
+      .animate-fadeInUp-delay-2 {
+        animation: fadeInUp 1s 0.4s cubic-bezier(0.23, 1, 0.32, 1) both;
+      }
+      .animate-fadeInUp-delay-3 {
+        animation: fadeInUp 1s 0.6s cubic-bezier(0.23, 1, 0.32, 1) both;
+      }
+      .resource-card {
+        transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
+      }
+      .resource-card:hover {
+        transform: translateY(-8px) scale(1.03);
+        box-shadow: 0 10px 32px 0 rgba(34, 197, 94, 0.15);
+        background: #f0fdf4;
+      }
+    </style>
   </head>
 
   <body class="gradient-bg font-raleway min-h-screen flex flex-col">
@@ -31,10 +61,7 @@
       <div
         class="container mx-auto px-4 py-3 flex justify-between items-center">
         <div class="flex items-center space-x-3">
-          <img
-            src="https://png.pngtree.com/png-vector/20211208/ourmid/pngtree-agricultural-logo-design-png-image_4051578.png"
-            class="h-8 w-8"
-            alt="AgroAI Logo" />
+          <img src="logo.jpg" class="h-8 w-8" alt="AgroAI Logo" />
           <span class="text-xl font-bold text-gray-800">AgroAI</span>
         </div>
         <div class="hidden md:flex space-x-6">
@@ -62,23 +89,45 @@
       </div>
     </nav>
 
+    <!-- Hero Section -->
+    <section
+      class="relative bg-gradient-to-br from-green-100 via-white to-agro-light py-20 md:py-28 flex items-center justify-center overflow-hidden">
+      <div
+        class="container mx-auto px-4 flex flex-col items-center text-center relative z-10">
+        <img
+          src="logo.jpg"
+          alt="AgroAI Logo"
+          class="h-20 w-20 mb-6 rounded-full border-4 border-agro-green shadow-xl bg-white animate-fadeInUp" />
+        <h1
+          class="text-5xl md:text-6xl font-extrabold text-gray-800 mb-4 drop-shadow-lg animate-fadeInUp-delay-1">
+          AgroAI Resources
+        </h1>
+        <p
+          class="text-xl md:text-2xl text-gray-700 mb-8 max-w-2xl font-medium animate-fadeInUp-delay-2">
+          Explore the technologies and datasets powering AgroAI's plant disease
+          detection platform.
+        </p>
+      </div>
+    </section>
+
     <!-- Main Content -->
     <main class="flex-grow container mx-auto px-4 py-24">
       <!-- Resources Card -->
       <div
-        class="max-w-6xl mx-auto bg-white/80 backdrop-blur-lg rounded-2xl shadow-lg p-10 space-y-8">
-        <h2 class="text-3xl font-bold text-center text-agro-green mb-8">
+        class="max-w-6xl mx-auto bg-white/80 backdrop-blur-lg rounded-2xl shadow-lg p-10 space-y-8 animate-fadeInUp">
+        <h2 class="text-3xl font-extrabold text-center text-agro-green mb-8">
           🚀 Resources Powering AgroAI
         </h2>
 
         <div class="grid md:grid-cols-2 gap-8">
           <!-- TensorFlow -->
-          <div>
+          <div
+            class="resource-card bg-white rounded-xl p-6 shadow flex flex-col gap-2 animate-fadeInUp-delay-1">
             <h3
-              class="text-xl font-semibold text-agro-green flex items-center gap-2">
+              class="text-2xl font-extrabold text-agro-green flex items-center gap-2 mb-2">
               <i class="fas fa-brain"></i> TensorFlow
             </h3>
-            <p class="text-gray-700">
+            <p class="text-gray-700 text-lg font-medium">
               <a
                 href="https://www.tensorflow.org/"
                 class="underline text-agro-green font-medium"
@@ -90,12 +139,13 @@
           </div>
 
           <!-- TensorFlow Lite -->
-          <div>
+          <div
+            class="resource-card bg-white rounded-xl p-6 shadow flex flex-col gap-2 animate-fadeInUp-delay-2">
             <h3
-              class="text-xl font-semibold text-agro-green flex items-center gap-2">
+              class="text-2xl font-extrabold text-agro-green flex items-center gap-2 mb-2">
               <i class="fas fa-mobile-alt"></i> TensorFlow Lite
             </h3>
-            <p class="text-gray-700">
+            <p class="text-gray-700 text-lg font-medium">
               <a
                 href="https://www.tensorflow.org/lite"
                 class="underline text-agro-green font-medium"
@@ -107,12 +157,13 @@
           </div>
 
           <!-- FastAPI -->
-          <div>
+          <div
+            class="resource-card bg-white rounded-xl p-6 shadow flex flex-col gap-2 animate-fadeInUp-delay-3">
             <h3
-              class="text-xl font-semibold text-agro-green flex items-center gap-2">
+              class="text-2xl font-extrabold text-agro-green flex items-center gap-2 mb-2">
               <i class="fas fa-rocket"></i> FastAPI
             </h3>
-            <p class="text-gray-700">
+            <p class="text-gray-700 text-lg font-medium">
               <a
                 href="https://fastapi.tiangolo.com/"
                 class="underline text-agro-green font-medium"
@@ -124,12 +175,13 @@
           </div>
 
           <!-- Plant Disease Dataset -->
-          <div>
+          <div
+            class="resource-card bg-white rounded-xl p-6 shadow flex flex-col gap-2 animate-fadeInUp-delay-1">
             <h3
-              class="text-xl font-semibold text-agro-green flex items-center gap-2">
+              class="text-2xl font-extrabold text-agro-green flex items-center gap-2 mb-2">
               <i class="fas fa-seedling"></i> Plant Disease Dataset
             </h3>
-            <p class="text-gray-700">
+            <p class="text-gray-700 text-lg font-medium">
               <a
                 href="https://www.kaggle.com/datasets/vipoooool/new-plant-diseases-dataset/data"
                 class="underline text-agro-green font-medium"
@@ -140,30 +192,66 @@
             </p>
           </div>
 
-          <!-- EfficientNetV2S -->
-          <div>
+          <!-- CNN -->
+          <div
+            class="resource-card bg-white rounded-xl p-6 shadow flex flex-col gap-2 animate-fadeInUp-delay-1">
             <h3
-              class="text-xl font-semibold text-agro-green flex items-center gap-2">
-              <i class="fas fa-network-wired"></i> EfficientNetV2S
+              class="text-2xl font-extrabold text-agro-green flex items-center gap-2 mb-2">
+              <i class="fas fa-project-diagram"></i> Custom CNN
             </h3>
-            <p class="text-gray-700">
+            <p class="text-gray-700 text-lg font-medium">
+              A custom Convolutional Neural Network (CNN) designed for fast and
+              efficient plant disease detection. Ideal for real-time or
+              resource-limited scenarios.
+            </p>
+          </div>
+
+          <!-- EfficientNetV2S -->
+          <div
+            class="resource-card bg-white rounded-xl p-6 shadow flex flex-col gap-2 animate-fadeInUp-delay-2">
+            <h3
+              class="text-2xl font-extrabold text-blue-600 flex items-center gap-2 mb-2">
+              <i class="fas fa-bolt"></i> EfficientNetV2S
+            </h3>
+            <p class="text-gray-700 text-lg font-medium">
               <a
                 href="https://arxiv.org/abs/2104.00298"
-                class="underline text-agro-green font-medium"
+                class="underline text-blue-600 font-bold"
                 >EfficientNetV2S</a
               >
               is a fast and accurate convolutional neural network optimized for
-              both training and inference speed.
+              both training and inference speed, offering an excellent balance
+              of accuracy and efficiency.
+            </p>
+          </div>
+
+          <!-- InceptionResNetV2 -->
+          <div
+            class="resource-card bg-white rounded-xl p-6 shadow flex flex-col gap-2 animate-fadeInUp-delay-3">
+            <h3
+              class="text-2xl font-extrabold text-purple-700 flex items-center gap-2 mb-2">
+              <i class="fas fa-brain"></i> InceptionResNetV2
+            </h3>
+            <p class="text-gray-700 text-lg font-medium">
+              <a
+                href="https://arxiv.org/abs/1602.07261"
+                class="underline text-purple-700 font-bold"
+                >InceptionResNetV2</a
+              >
+              combines the power of Inception modules with residual connections
+              for state-of-the-art accuracy, best suited for research or
+              critical diagnoses where accuracy is paramount.
             </p>
           </div>
 
           <!-- ResNet50V2 -->
-          <div>
+          <div
+            class="resource-card bg-white rounded-xl p-6 shadow flex flex-col gap-2 animate-fadeInUp-delay-1">
             <h3
-              class="text-xl font-semibold text-agro-green flex items-center gap-2">
+              class="text-2xl font-extrabold text-agro-green flex items-center gap-2 mb-2">
               <i class="fas fa-layer-group"></i> ResNet50V2
             </h3>
-            <p class="text-gray-700">
+            <p class="text-gray-700 text-lg font-medium">
               <a
                 href="https://keras.io/api/applications/resnet/#resnet50v2-function"
                 class="underline text-agro-green font-medium"
@@ -174,27 +262,14 @@
             </p>
           </div>
 
-          <!-- CNN -->
-          <div>
-            <h3
-              class="text-xl font-semibold text-agro-green flex items-center gap-2">
-              <i class="fas fa-project-diagram"></i> Convolutional Neural
-              Networks (CNN)
-            </h3>
-            <p class="text-gray-700">
-              CNNs are the backbone of image-based machine learning tasks. They
-              are especially effective in pattern recognition and visual data
-              classification.
-            </p>
-          </div>
-
           <!-- Machine Learning -->
-          <div>
+          <div
+            class="resource-card bg-white rounded-xl p-6 shadow flex flex-col gap-2 animate-fadeInUp-delay-2">
             <h3
-              class="text-xl font-semibold text-agro-green flex items-center gap-2">
+              class="text-2xl font-extrabold text-agro-green flex items-center gap-2 mb-2">
               <i class="fas fa-cogs"></i> Machine Learning
             </h3>
-            <p class="text-gray-700">
+            <p class="text-gray-700 text-lg font-medium">
               Machine learning enables AgroAI to learn from plant data, identify
               disease symptoms, and make accurate predictions using model
               inference.
@@ -210,10 +285,7 @@
         <div class="flex flex-col md:flex-row justify-between items-center">
           <div class="mb-4 md:mb-0">
             <div class="flex items-center space-x-2">
-              <img
-                src="https://png.pngtree.com/png-vector/20211208/ourmid/pngtree-agricultural-logo-design-png-image_4051578.png"
-                class="h-8 w-8"
-                alt="AgroAI Logo" />
+              <img src="logo.jpg" class="h-8 w-8" alt="AgroAI Logo" />
               <span class="text-xl font-bold">AgroAI</span>
             </div>
             <p class="text-gray-400 mt-2">
